@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Student Game Projects | Shunsuke Nonomura</title>
+    <style>
+      :root {
+        --bg: #f6f4ef;
+        --surface: rgba(255, 252, 247, 0.93);
+        --surface-strong: #fffdf8;
+        --ink: #2a241f;
+        --muted: #645a51;
+        --line: rgba(104, 76, 43, 0.14);
+        --accent: #9a5c14;
+        --accent-2: #d08a2c;
+        --accent-soft: rgba(154, 92, 20, 0.1);
+        --shadow: 0 24px 72px rgba(72, 54, 31, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at top left, rgba(208, 138, 44, 0.16), transparent 24%),
+          radial-gradient(circle at 90% 0%, rgba(154, 92, 20, 0.1), transparent 24%),
+          linear-gradient(180deg, #fdfbf7 0%, var(--bg) 44%, #f1ece3 100%);
+        font-family: "Avenir Next", "Hiragino Sans", "Yu Gothic", sans-serif;
+      }
+
+      .page {
+        width: min(1100px, calc(100vw - 32px));
+        margin: 20px auto 48px;
+      }
+
+      .hero,
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 30px;
+        background: var(--surface);
+        box-shadow: var(--shadow);
+      }
+
+      .hero {
+        padding: 42px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 1.08fr 0.92fr;
+        gap: 22px;
+        margin-top: 22px;
+      }
+
+      .stack {
+        display: grid;
+        gap: 22px;
+      }
+
+      .panel {
+        padding: 28px;
+      }
+
+      .eyebrow {
+        margin: 0 0 12px;
+        color: var(--accent);
+        font-size: 0.82rem;
+        font-weight: 800;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+        font-family: "Iowan Old Style", "Palatino Linotype", "Yu Mincho", serif;
+        line-height: 1.08;
+      }
+
+      h1 {
+        font-size: clamp(2.8rem, 7vw, 5rem);
+        letter-spacing: -0.04em;
+      }
+
+      h2 {
+        font-size: clamp(1.8rem, 4vw, 2.2rem);
+        letter-spacing: -0.03em;
+      }
+
+      h3 {
+        font-size: 1.12rem;
+      }
+
+      p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      .hero p + p,
+      .card p,
+      .panel > p + p {
+        margin-top: 14px;
+      }
+
+      .cards {
+        display: grid;
+        gap: 14px;
+        margin-top: 18px;
+      }
+
+      .card {
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: var(--surface-strong);
+      }
+
+      .video-frame {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        margin-top: 16px;
+        border: 0;
+        border-radius: 18px;
+        background: #ece4d8;
+      }
+
+      .bullets {
+        display: grid;
+        gap: 12px;
+        margin: 18px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .bullets li {
+        position: relative;
+        padding-left: 18px;
+        color: var(--muted);
+        line-height: 1.72;
+      }
+
+      .bullets li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.72em;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      }
+
+      .links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      .link {
+        padding: 10px 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(154, 92, 20, 0.12);
+        background: var(--accent-soft);
+        color: var(--accent);
+        text-decoration: none;
+        font-size: 0.84rem;
+        font-weight: 700;
+      }
+
+      @media (max-width: 860px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero,
+        .panel {
+          padding: 26px 22px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <section class="hero">
+        <p class="eyebrow">Creative Background</p>
+        <h1>学生時代のゲーム制作</h1>
+        <p>
+          学生時代には、ゲームを遊ぶだけでなく、自分で作ることにも強く関心がありました。
+          規模は大きくありませんが、複数の技術やライブラリを使って実際にゲームを形にしていました。
+        </p>
+        <p>
+          今でも将来的にゲーム制作へ戻りたい気持ちがあり、その源泉の一つがこの時期の経験です。
+        </p>
+      </section>
+
+      <div class="grid">
+        <div class="stack">
+          <section class="panel">
+            <p class="eyebrow">Projects</p>
+            <h2>作ったもの</h2>
+            <div class="cards">
+              <article class="card">
+                <h3>curses で `ヘルメット`</h3>
+                <p>端末ベースの描画と入力処理でゲームを組み立てる体験として印象に残っています。</p>
+              </article>
+              <article class="card">
+                <h3>Java の Swing でシューティングゲーム</h3>
+                <p>GUI ベースで動くゲームを自分で作る感覚を掴んだ、初期の制作物の一つでした。</p>
+              </article>
+              <article class="card">
+                <h3>DX ライブラリでボンバーマン</h3>
+                <p>2D ゲームらしい画面構成やルール実装を、自分の手で形にした題材です。</p>
+              </article>
+              <article class="card">
+                <h3>OpenGL で 3D ぷよぷよ</h3>
+                <p>描画表現や立体的な見せ方まで踏み込んで触れた制作物でした。</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="panel">
+            <p class="eyebrow">Meaning</p>
+            <h2>今につながっていること</h2>
+            <ul class="bullets">
+              <li>既存のものを使うだけでなく、自分で仕組みを作ってみたい志向</li>
+              <li>技術を覚えるとき、完成物まで持っていく方が面白いという感覚</li>
+              <li>将来、AI を活かした創作やゲーム制作に戻りたいという関心の起点</li>
+            </ul>
+          </section>
+
+          <section class="panel">
+            <p class="eyebrow">Reference</p>
+            <h2>参考資料</h2>
+            <div class="cards">
+              <article class="card">
+                <h3>技術リンク</h3>
+                <p><a href="https://www.kushiro-ct.ac.jp/yanagawa/ex-2017/2-game/01.html">curses</a></p>
+                <p><a href="https://ja.wikipedia.org/wiki/Swing">Java Swing</a></p>
+                <p><a href="https://dxlib.xsrv.jp/">DX ライブラリ</a></p>
+                <p><a href="https://www.opengl.org/">OpenGL</a></p>
+              </article>
+              <article class="card">
+                <h3>創作物まとめ動画</h3>
+                <p><a href="https://www.youtube.com/watch?v=YMlkhBLA0Cw">学生時代の創作物をまとめた動画</a></p>
+                <iframe
+                  class="video-frame"
+                  src="https://www.youtube.com/embed/YMlkhBLA0Cw"
+                  title="学生時代の創作物をまとめた動画"
+                  loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  allowfullscreen
+                ></iframe>
+              </article>
+            </div>
+          </section>
+        </div>
+
+        <div class="stack">
+          <section class="panel">
+            <p class="eyebrow">Snapshot</p>
+            <h2>要点</h2>
+            <ul class="bullets">
+              <li>学生時代からゲームを作る側にも関心があった</li>
+              <li>curses、DX ライブラリ、OpenGL に触れていた</li>
+              <li>今の創作志向や将来のゲーム制作関心につながっている</li>
+            </ul>
+          </section>
+
+          <section class="panel">
+            <p class="eyebrow">Links</p>
+            <h2>関連ページ</h2>
+            <div class="links">
+              <a class="link" href="../portfolio/">Portfolio</a>
+              <a class="link" href="../rhythm-games/">Rhythm Games</a>
+              <a class="link" href="../">Public Site Top</a>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
