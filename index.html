@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>野々村 俊輔 | Public Site</title>
+    <style>
+      :root {
+        --bg: #f3f6fa;
+        --ink: #1d2835;
+        --muted: #586879;
+        --accent: #0d5ea6;
+        --line: rgba(52, 83, 112, 0.14);
+        --surface: rgba(255, 255, 255, 0.9);
+        --shadow: 0 24px 80px rgba(34, 60, 88, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at top left, rgba(47, 125, 195, 0.16), transparent 28%),
+          linear-gradient(180deg, #f8fafc 0%, var(--bg) 46%, #edf2f7 100%);
+        font-family: "Avenir Next", "Hiragino Sans", "Yu Gothic", sans-serif;
+      }
+
+      .page {
+        width: min(1040px, calc(100vw - 32px));
+        margin: 20px auto 48px;
+      }
+
+      .hero,
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        background: var(--surface);
+        box-shadow: var(--shadow);
+      }
+
+      .hero {
+        padding: 42px;
+      }
+
+      .eyebrow {
+        margin: 0 0 12px;
+        color: var(--accent);
+        font-size: 0.82rem;
+        font-weight: 800;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      .identity {
+        margin: 0 0 10px;
+        font-size: 1rem;
+        font-weight: 700;
+      }
+
+      h1,
+      h2 {
+        margin: 0;
+        font-family: "Iowan Old Style", "Palatino Linotype", "Yu Mincho", serif;
+        line-height: 1.08;
+      }
+
+      h1 {
+        font-size: clamp(2.8rem, 7vw, 5rem);
+        letter-spacing: -0.04em;
+      }
+
+      h2 {
+        font-size: clamp(1.8rem, 4vw, 2.2rem);
+        letter-spacing: -0.03em;
+      }
+
+      p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      .hero p + p {
+        margin-top: 16px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 22px;
+        margin-top: 22px;
+      }
+
+      .panel {
+        padding: 26px;
+      }
+
+      .links {
+        display: grid;
+        gap: 12px;
+        margin-top: 18px;
+      }
+
+      .link-card {
+        display: block;
+        padding: 18px 20px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.9);
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .link-card strong {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--accent);
+      }
+
+      ul {
+        margin: 18px 0 0;
+        padding-left: 18px;
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      @media (max-width: 860px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero {
+          padding: 30px 22px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <section class="hero">
+        <p class="eyebrow">Public Site</p>
+        <p class="identity">野々村 俊輔 / Shunsuke Nonomura</p>
+        <h1>公開用の自己紹介ページ</h1>
+        <p>
+          このサイトは、private な運用リポジトリから明示的に export した公開用 staging をもとに構成しています。
+          現在は表紙とポートフォリオのみを公開対象としています。
+        </p>
+      </section>
+
+      <div class="grid">
+        <section class="panel">
+          <p class="eyebrow">Contents</p>
+          <h2>公開中の内容</h2>
+          <div class="links">
+            <a class="link-card" href="./portfolio/">
+              <strong>Portfolio</strong>
+              これまでの取り組み、強み、個人プロジェクトをまとめたポートフォリオ
+            </a>
+          </div>
+        </section>
+
+        <section class="panel">
+          <p class="eyebrow">Notes</p>
+          <h2>運用方針</h2>
+          <ul>
+            <li>公開対象は private リポジトリ側で明示的に export したものだけ</li>
+            <li>公開前に必ず人手で差分確認を行う</li>
+            <li>公開サイトの最新版は GitHub Pages で配信する想定</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>
