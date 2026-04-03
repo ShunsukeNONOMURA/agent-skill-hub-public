@@ -166,11 +166,15 @@
           このサイトは、private な運用リポジトリから明示的に export した公開用 staging をもとに構成しています。
           現在はポートフォリオ本体に加えて、個人プロジェクト詳細、趣味、学生時代の制作背景を公開対象にしています。
         </p>
+        <p>
+          source of truth は private な <code>agent-skill-hub</code> にあり、このサイトはその中の <code>public-site/</code> から
+          選別した内容だけを <code>agent-skill-hub-public</code> へ同期して公開しています。
+        </p>
         <p class="disclosure">
           この公開ページ群の文章は AI と共創しながら整えています。事実関係や掲載意図は本人の判断に基づいていますが、
           表現のニュアンスには部分的な揺らぎが含まれる場合があります。
         </p>
-        <p class="meta">Public tag: public-v20260403-03</p>
+        <p class="meta">Public tag: public-v20260403-04</p>
       </section>
 
       <div class="grid">
@@ -206,6 +210,7 @@
           <h2>運用方針</h2>
           <ul>
             <li>公開対象は private リポジトリ側で明示的に export したものだけ</li>
+            <li>公開 repository は private repo の全量コピーではなく、公開用 mirror として扱う</li>
             <li>公開前に必ず人手で差分確認を行う</li>
             <li>公開サイトの最新版は GitHub Pages で配信する想定</li>
           </ul>

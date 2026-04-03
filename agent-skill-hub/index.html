@@ -198,6 +198,18 @@
         font-weight: 700;
       }
 
+      .relation {
+        margin-top: 20px;
+        padding: 16px 18px;
+        border: 1px solid rgba(13, 94, 166, 0.14);
+        border-radius: 18px;
+        background: rgba(13, 94, 166, 0.05);
+      }
+
+      .relation p + p {
+        margin-top: 10px;
+      }
+
       @media (max-width: 860px) {
         .grid {
           grid-template-columns: 1fr;
@@ -220,6 +232,13 @@
           単なる prompt 集やメモ置き場ではなく、会話、ノート、スキル、補助ツール、成果物を同じ場所で循環させ、
           次の思考条件や作業条件を改善していく基盤として育てています。
         </p>
+        <div class="relation">
+          <p>このページで紹介している内容の source of truth は private な <code>agent-skill-hub</code> にあります。</p>
+          <p>
+            公開時はその中の <code>public-site/</code> で内容を選別し、公開用 mirror である
+            <code>agent-skill-hub-public</code> へ同期して GitHub Pages で配信しています。
+          </p>
+        </div>
         <div class="chips">
           <span class="chip">Agentic Workflow Design</span>
           <span class="chip">Knowledge Management</span>
@@ -275,6 +294,10 @@
               <article class="card">
                 <h3><code>public-site</code></h3>
                 <p>private repo から明示的 export した公開用 staging です。</p>
+              </article>
+              <article class="card">
+                <h3><code>agent-skill-hub-public</code></h3>
+                <p><code>public-site/</code> の内容だけを同期する公開用 mirror で、GitHub Pages の配信元です。</p>
               </article>
             </div>
           </section>
