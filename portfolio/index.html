@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Portfolio | Shunsuke</title>
+    <style>
+      :root {
+        --bg: #f3f5f8;
+        --bg-strong: #dde5ee;
+        --surface: rgba(255, 255, 255, 0.9);
+        --surface-strong: #ffffff;
+        --ink: #1c2733;
+        --muted: #546271;
+        --line: rgba(52, 83, 112, 0.14);
+        --accent: #0d5ea6;
+        --accent-2: #2f7dc3;
+        --accent-soft: rgba(13, 94, 166, 0.1);
+        --shadow: 0 24px 80px rgba(34, 60, 88, 0.12);
+        --radius-xl: 32px;
+        --radius-lg: 24px;
+        --radius-md: 18px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at top left, rgba(47, 125, 195, 0.18), transparent 28%),
+          radial-gradient(circle at 85% 10%, rgba(13, 94, 166, 0.12), transparent 22%),
+          linear-gradient(180deg, #f8fafc 0%, var(--bg) 42%, #eef2f7 100%);
+        font-family: "Avenir Next", "Hiragino Sans", "Yu Gothic", sans-serif;
+      }
+
+      a {
+        color: var(--accent);
+      }
+
+      .page {
+        width: min(1180px, calc(100vw - 36px));
+        margin: 22px auto 48px;
+      }
+
+      .breadcrumb {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 14px;
+        padding: 12px 16px;
+        border: 1px solid rgba(13, 94, 166, 0.12);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.72);
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .breadcrumb a {
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 700;
+      }
+
+      .crumb-sep {
+        color: rgba(84, 98, 113, 0.7);
+      }
+
+      .hero {
+        position: relative;
+        overflow: hidden;
+        padding: 46px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-xl);
+        background:
+          linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(240, 246, 252, 0.88)),
+          var(--surface);
+        box-shadow: var(--shadow);
+      }
+
+      .hero::before,
+      .hero::after {
+        content: "";
+        position: absolute;
+        border-radius: 999px;
+        pointer-events: none;
+      }
+
+      .hero::before {
+        width: 340px;
+        height: 340px;
+        top: -150px;
+        right: -80px;
+        background: radial-gradient(circle, rgba(47, 125, 195, 0.18), transparent 70%);
+      }
+
+      .hero::after {
+        width: 260px;
+        height: 260px;
+        left: -90px;
+        bottom: -120px;
+        background: radial-gradient(circle, rgba(13, 94, 166, 0.12), transparent 68%);
+      }
+
+      .hero-grid {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: 1.4fr 0.88fr;
+        gap: 28px;
+        align-items: end;
+      }
+
+      .eyebrow {
+        margin: 0 0 14px;
+        color: var(--accent);
+        font-size: 0.82rem;
+        font-weight: 800;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      .identity {
+        margin: 0 0 12px;
+        color: var(--ink);
+        font-size: 0.98rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+        font-family: "Iowan Old Style", "Palatino Linotype", "Yu Mincho", serif;
+        line-height: 1.06;
+      }
+
+      h1 {
+        max-width: 11ch;
+        font-size: clamp(3rem, 7vw, 5.8rem);
+        letter-spacing: -0.045em;
+      }
+
+      h2 {
+        font-size: clamp(1.9rem, 3.4vw, 2.4rem);
+        letter-spacing: -0.035em;
+      }
+
+      h3 {
+        font-size: 1.16rem;
+      }
+
+      p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      .hero-copy p {
+        max-width: 60ch;
+        margin-top: 18px;
+        font-size: 1.01rem;
+      }
+
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 22px;
+      }
+
+      .chip {
+        padding: 10px 14px;
+        border: 1px solid rgba(13, 94, 166, 0.12);
+        border-radius: 999px;
+        background: var(--accent-soft);
+        color: var(--accent);
+        font-size: 0.84rem;
+        font-weight: 700;
+      }
+
+      .page-meta {
+        margin-top: 18px;
+        padding: 14px 16px;
+        border: 1px solid rgba(13, 94, 166, 0.12);
+        border-radius: 18px;
+        background: rgba(13, 94, 166, 0.05);
+        color: var(--muted);
+        font-size: 0.92rem;
+        line-height: 1.7;
+      }
+
+      .hero-card {
+        padding: 24px;
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.78);
+        backdrop-filter: blur(16px);
+      }
+
+      .hero-card p + p {
+        margin-top: 12px;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: 1.08fr 0.72fr;
+        gap: 24px;
+        margin-top: 24px;
+      }
+
+      .stack {
+        display: grid;
+        gap: 24px;
+      }
+
+      .panel {
+        padding: 28px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-lg);
+        background: var(--surface);
+        box-shadow: 0 16px 56px rgba(34, 60, 88, 0.08);
+      }
+
+      .panel > p:first-of-type {
+        margin-top: 14px;
+      }
+
+      .summary-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 20px;
+      }
+
+      .summary-item {
+        padding: 18px;
+        border-radius: var(--radius-md);
+        background: #f8fbfe;
+        border: 1px solid var(--line);
+      }
+
+      .summary-item strong {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--accent);
+        font-size: 0.76rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .summary-item span {
+        color: var(--ink);
+        font-size: 1.03rem;
+        line-height: 1.45;
+        font-weight: 700;
+      }
+
+      .bullets {
+        display: grid;
+        gap: 12px;
+        padding: 0;
+        margin: 18px 0 0;
+        list-style: none;
+      }
+
+      .bullets li {
+        position: relative;
+        padding-left: 18px;
+        color: var(--muted);
+        line-height: 1.72;
+      }
+
+      .bullets li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.72em;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--accent);
+      }
+
+      .timeline {
+        display: grid;
+        gap: 20px;
+        margin-top: 20px;
+      }
+
+      .career {
+        position: relative;
+        padding: 0 0 0 28px;
+      }
+
+      .career::before {
+        content: "";
+        position: absolute;
+        left: 7px;
+        top: 4px;
+        bottom: -18px;
+        width: 2px;
+        background: linear-gradient(180deg, var(--accent), rgba(13, 94, 166, 0.08));
+      }
+
+      .career:last-child::before {
+        bottom: 28px;
+      }
+
+      .career::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 6px;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        box-shadow: 0 0 0 6px rgba(13, 94, 166, 0.1);
+      }
+
+      .career-meta {
+        margin-bottom: 8px;
+        color: var(--accent);
+        font-size: 0.8rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .career p {
+        margin-top: 10px;
+      }
+
+      .cards {
+        display: grid;
+        gap: 14px;
+        margin-top: 18px;
+      }
+
+      .card {
+        padding: 18px;
+        border-radius: var(--radius-md);
+        border: 1px solid var(--line);
+        background: var(--surface-strong);
+      }
+
+      .card p {
+        margin-top: 10px;
+      }
+
+      .project-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 16px;
+        color: var(--accent);
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .footer {
+        margin-top: 24px;
+        padding: 24px 28px;
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--line);
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(238, 245, 252, 0.84));
+        box-shadow: 0 14px 44px rgba(34, 60, 88, 0.08);
+      }
+
+      .footer p + p {
+        margin-top: 12px;
+      }
+
+      code {
+        padding: 0.15em 0.4em;
+        border-radius: 8px;
+        background: rgba(13, 94, 166, 0.08);
+        color: #0c4f8b;
+        font-family: "SFMono-Regular", "Consolas", "Menlo", monospace;
+        font-size: 0.92em;
+      }
+
+      @media (max-width: 980px) {
+        .hero-grid,
+        .layout,
+        .summary-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero {
+          padding: 34px 24px;
+        }
+
+        .panel {
+          padding: 24px;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .page {
+          width: min(100vw - 16px, 1180px);
+          margin: 10px auto 28px;
+        }
+
+        h1 {
+          max-width: none;
+          font-size: clamp(2.5rem, 12vw, 4.2rem);
+        }
+
+        .chip {
+          width: 100%;
+          text-align: center;
+        }
+      }
+
+      @media print {
+        body {
+          background: #ffffff;
+        }
+
+        .page {
+          width: auto;
+          margin: 0;
+        }
+
+        .hero,
+        .panel,
+        .footer {
+          box-shadow: none;
+          break-inside: avoid;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <nav class="breadcrumb" aria-label="breadcrumb">
+        <a href="../">Top</a>
+        <span class="crumb-sep">/</span>
+        <span>Portfolio</span>
+      </nav>
+
+      <header class="hero">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">General Portfolio</p>
+            <p class="identity">Shunsuke</p>
+            <h1>設計と実装を、積み重ねとして残していく。</h1>
+            <p>
+              画像理解の実務から始まり、バックエンド設計、開発リード、AI 活用へと軸足を広げてきました。
+              目の前の実装だけで終わらせず、判断基準や設計意図を言語化し、次の開発に再利用できる形へ変えることを重視しています。
+            </p>
+            <div class="chips">
+              <span class="chip">Backend API Design</span>
+              <span class="chip">RDB Design</span>
+              <span class="chip">Object-Oriented Design</span>
+              <span class="chip">AI Workflow Design</span>
+            </div>
+            <p class="page-meta">作成日: 2026-04-01 / 更新日: 2026-04-05</p>
+          </div>
+
+          <aside class="hero-card">
+            <p class="eyebrow">Current Position</p>
+            <h2>技術判断を、仕組みへ寄せる。</h2>
+            <p>
+              現在は、実装者としての延長だけでなく、技術判断や設計方針を再利用可能な形に整理できる立ち位置を強めています。
+            </p>
+            <p>
+              個人プロジェクト <code>agent-skill-hub</code> では、人と AI の協働、知識蓄積、成果物生成をつなぐ運用を継続的に実験しています。
+            </p>
+          </aside>
+        </div>
+      </header>
+
+      <main class="layout">
+        <div class="stack">
+          <section class="panel">
+            <p class="eyebrow">Overview</p>
+            <h2>概要</h2>
+            <p>
+              キャリア全体を通して一貫しているのは、単に仕様どおりに実装することではなく、
+              不明確な前提や不足している構造を見つけ、設計や文書化を通じて前進可能な形へ整える姿勢です。
+            </p>
+            <p style="margin-top: 16px;">
+              バックエンド設計、RDB 設計、責務分離、AI 活用プロセス設計を中心に、
+              技術的な判断を属人的な勘で終わらせず、他者が参照できる形へ残すことを仕事の軸にしています。
+            </p>
+            <div class="summary-grid">
+              <div class="summary-item">
+                <strong>Base</strong>
+                <span>画像理解から始まった技術キャリア</span>
+              </div>
+              <div class="summary-item">
+                <strong>Main</strong>
+                <span>API 設計、RDB 設計、責務分離</span>
+              </div>
+              <div class="summary-item">
+                <strong>Now</strong>
+                <span>AI を組み込んだ開発フロー設計</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel">
+            <p class="eyebrow">Career Timeline</p>
+            <h2>キャリア年表</h2>
+            <div class="timeline">
+              <article class="career">
+                <div class="career-meta">2017 / Computer Vision</div>
+                <h3>画像理解系業務</h3>
+                <p>
+                  路面画像を対象とした異常検知・分類モデルの設計および実装に従事。
+                  マンホール検出では、教師データ整備とモデル改善により精度を約 6 割から約 9 割へ改善しました。
+                </p>
+                <ul class="bullets">
+                  <li>画像理解、異常検知、分類モデルの実務経験</li>
+                  <li>セマンティックセグメンテーションへの再定義で対象範囲を拡張</li>
+                  <li>指標や失敗事例を整理し、改善方針として関係者へ還元</li>
+                </ul>
+              </article>
+
+              <article class="career">
+                <div class="career-meta">2018-2019 / Ambiguous Theme Launch</div>
+                <h3>チャットボット立ち上げ系テーマ</h3>
+                <p>
+                  成功条件が明確でないテーマで、要件整理、設計、実装、検証を広く担当。
+                  この時期の経験を通じて、実装だけでは積み重ねにならず、判断の背景や設計意図を残す必要があると強く認識しました。
+                </p>
+              </article>
+
+              <article class="career">
+                <div class="career-meta">2020-2024 / Long-Term Product Development</div>
+                <h3>セールステック</h3>
+                <p>
+                  単独開発フェーズから開発リーダへ役割を広げ、営業支援システムの設計と改善を継続。
+                  バックエンド API 設計、RDB 設計、責務分離、設計判断の整理を中核として担ってきました。
+                </p>
+                <ul class="bullets">
+                  <li>長期テーマでの継続開発と改善</li>
+                  <li>実装と設計判断の両方をつなぐ役割</li>
+                  <li>進め方や体制も含めて全体を捉える視点</li>
+                </ul>
+              </article>
+
+              <article class="career">
+                <div class="career-meta">2025- / AI Workflow and Development Lead</div>
+                <h3>AI 活用系テーマ</h3>
+                <p>
+                  テックリードから開発リーダ寄りへと役割を広げながら、技術判断に加えて体制面の補完も担当。
+                  システム全体を俯瞰し、不足している構造を言語化する視点を強めました。
+                </p>
+              </article>
+            </div>
+          </section>
+
+          <section class="panel">
+            <p class="eyebrow">Independent Project</p>
+            <h2><code>agent-skill-hub</code></h2>
+            <p>
+              個人で継続開発している、agent skill の作成、運用、成果物管理を一元化するリポジトリです。
+              単なるメモ置き場ではなく、会話、ノート、スキル、補助ツール、成果物を同じ場所で循環させ、
+              次の思考条件や作業条件を改善していく基盤として設計しています。
+            </p>
+            <ul class="bullets">
+              <li><code>入力 → 処理 → 出力 → 文脈更新</code> のループを明示的に設計</li>
+              <li>再利用知識としての <code>.memory</code>、行動定義としての <code>.agents</code>、成果物アーカイブを役割分離</li>
+              <li>AI 活用を単発の補助ではなく、運用改善と成果物生成のプロセスへ組み込む</li>
+              <li>継続ノートやルール改善を通じて、判断を資産として蓄積する</li>
+            </ul>
+            <a class="project-link" href="https://github.com/ShunsukeNONOMURA/agent-skill-hub-public">Public Repository</a>
+            <a class="project-link" href="../agent-skill-hub/">Project Detail Page</a>
+            <a class="project-link" href="../">Top</a>
+          </section>
+
+          <section class="panel">
+            <p class="eyebrow">Personal Side</p>
+            <h2>趣味と創作の源泉</h2>
+            <p>
+              仕事の外側では、長く音ゲーを続けています。学生時代にはゲーム制作もしており、
+              「遊ぶこと」と「作ること」の両方が今の技術的な関心や創作志向につながっています。
+            </p>
+            <ul class="bullets">
+              <li>音ゲーを中心に、反復して上達していくタイプのゲームを長く楽しんでいる</li>
+              <li>譜面や演奏感の違いを見るのが好きで、遊ぶだけでなく作る側への関心も強い</li>
+              <li>学生時代には複数の技術やライブラリでゲーム制作を試していた</li>
+            </ul>
+            <a class="project-link" href="../games/">Games Overview Draft</a>
+            <a class="project-link" href="../notes/">Public Notes</a>
+            <a class="project-link" href="../timeline/">Timeline Draft</a>
+            <a class="project-link" href="../rhythm-games/">Rhythm Games Page</a>
+            <a class="project-link" href="../student-game-projects/">Student Game Projects Page</a>
+          </section>
+        </div>
+
+        <div class="stack">
+          <section class="panel">
+            <p class="eyebrow">Strengths</p>
+            <h2>強み</h2>
+            <div class="cards">
+              <article class="card">
+                <h3>設計を言語化する力</h3>
+                <p>
+                  API 設計、RDB 設計、責務分離などの判断を、実装者の頭の中に閉じ込めず、
+                  他者が参照しやすい形へ整理することを重視しています。
+                </p>
+              </article>
+              <article class="card">
+                <h3>曖昧さの構造整理</h3>
+                <p>
+                  前提や役割が不明確な状況でも、足りないものを洗い出し、進め方や判断軸を明確にすることでテーマを前進させます。
+                </p>
+              </article>
+              <article class="card">
+                <h3>AI 活用の実装力</h3>
+                <p>
+                  AI を単なる文章生成で終わらせず、知識整理、作業分解、成果物生成、運用改善まで接続して考えています。
+                </p>
+              </article>
+            </div>
+          </section>
+
+          <section class="panel">
+            <p class="eyebrow">Performance Conditions</p>
+            <h2>能力発揮の条件</h2>
+            <div class="cards">
+              <article class="card">
+                <h3>力を出しやすい状況</h3>
+                <p>
+                  技術判断の余地があり、前提整理や設計意図の明文化が価値になる環境では、強みが出やすいです。
+                  特に、曖昧さを構造へ変える役割や、設計と実装をつなぐ役割で価値を出しやすいと考えています。
+                </p>
+              </article>
+              <article class="card">
+                <h3>力を出しにくい状況</h3>
+                <p>
+                  役割や期待が曖昧なまま、調整負荷だけが個人に集中する環境では、継続的な能力発揮が難しくなりやすいです。
+                  これは短所というより、構造整理を重視するスタンスの裏返しとしてのパフォーマンス特性です。
+                </p>
+              </article>
+            </div>
+          </section>
+
+          <section class="panel">
+            <p class="eyebrow">Focus Areas</p>
+            <h2>技術領域</h2>
+            <ul class="bullets">
+              <li>バックエンド API 設計</li>
+              <li>RDB 設計</li>
+              <li>オブジェクト指向設計</li>
+              <li>ドメインモデリング</li>
+              <li>Computer Vision</li>
+              <li>Semantic Segmentation</li>
+              <li>AI 活用プロセス設計</li>
+              <li>知識管理と成果物運用</li>
+            </ul>
+          </section>
+
+          <section class="panel">
+            <p class="eyebrow">Working Style</p>
+            <h2>仕事の進め方</h2>
+            <ul class="bullets">
+              <li>課題をそのまま受け取るのではなく、定義し直して前に進める</li>
+              <li>判断理由を文章として残し、次回の再現性を上げる</li>
+              <li>個人依存のままにせず、作業の input / output を定義する</li>
+              <li>人と AI の役割分担を意識し、レビューと判断に人の力を寄せる</li>
+            </ul>
+          </section>
+
+          <section class="panel">
+            <p class="eyebrow">Direction</p>
+            <h2>今後の志向</h2>
+            <p>
+              今後は、単なる実装担当ではなく、技術判断や設計方針を再利用可能な形で定義し、
+              チームやプロセスに定着させられるテックリード / 技術エキスパート寄りの役割を強めていきたいと考えています。
+            </p>
+          </section>
+        </div>
+      </main>
+
+      <footer class="footer">
+        <p>
+          このポートフォリオは、リポジトリ内の継続ノートと既存資料をもとに再構成した汎用版です。
+          詳細な案件説明や実績数値は、公開範囲や用途に応じて個別に調整できます。
+        </p>
+        <p>Last updated: 2026-04-01</p>
+      </footer>
+    </div>
+  </body>
+</html>

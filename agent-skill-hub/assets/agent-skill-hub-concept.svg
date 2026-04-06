@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="1040" viewBox="0 0 980 1040" role="img" aria-labelledby="title desc">
+  <title id="title">agent-skill-hub concept diagram</title>
+  <desc id="desc">Input、Process、Output、Next Input を縦に並べ、右側に Context と Context Update を置いたコンセプト図。</desc>
+  <style>
+    .bg { fill: #f6f9fc; }
+    .box { fill: #ffffff; stroke: #0d5ea6; stroke-width: 2.5; rx: 18; ry: 18; }
+    .box-soft { fill: #eef6ff; stroke: #2f7dc3; stroke-width: 2.5; rx: 18; ry: 18; }
+    .label {
+      font: 700 16px "Avenir Next", "Hiragino Sans", "Yu Gothic", sans-serif;
+      fill: #3b4957;
+      text-anchor: middle;
+    }
+    .text {
+      font: 15px "Avenir Next", "Hiragino Sans", "Yu Gothic", sans-serif;
+      fill: #1b2733;
+      text-anchor: middle;
+    }
+    .arrow { stroke: #0d5ea6; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+    .arrow-soft { stroke: #2f7dc3; stroke-width: 3; fill: none; marker-end: url(#arrowSoft); }
+  </style>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#0d5ea6"/>
+    </marker>
+    <marker id="arrowSoft" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#2f7dc3"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="980" height="1040" rx="28" ry="28"/>
+
+  <rect class="box" x="120" y="90" width="280" height="110" rx="18" ry="18"/>
+  <text class="label" x="260" y="136">Input</text>
+  <text class="text" x="260" y="170">要求 / メモ / 資料 / 問題</text>
+
+  <rect class="box" x="70" y="340" width="390" height="110" rx="18" ry="18"/>
+  <text class="label" x="265" y="386">Process</text>
+  <text class="text" x="265" y="420">解釈 / 調査 / 生成 / 検証 / 保存判断</text>
+
+  <rect class="box" x="80" y="620" width="350" height="110" rx="18" ry="18"/>
+  <text class="label" x="255" y="666">Output</text>
+  <text class="text" x="255" y="700">回答 / skill / note / report / code</text>
+
+  <rect class="box" x="70" y="910" width="390" height="110" rx="18" ry="18"/>
+  <text class="label" x="265" y="956">Next Input</text>
+  <text class="text" x="265" y="990">次の依頼 / 次の判断材料 / 次の作業入口</text>
+
+  <rect class="box-soft" x="560" y="340" width="360" height="110" rx="18" ry="18"/>
+  <text class="label" x="740" y="386">Context</text>
+  <text class="text" x="740" y="420">.memory / .agents / .tools / docs / rules</text>
+
+  <rect class="box-soft" x="520" y="620" width="440" height="110" rx="18" ry="18"/>
+  <text class="label" x="740" y="666">Context Update</text>
+  <text class="text" x="740" y="700">memory更新 / skill改善 / index反映 / 運用ルール調整</text>
+
+  <path class="arrow" d="M260 200 V328"/>
+  <path class="arrow" d="M255 450 V608"/>
+  <path class="arrow" d="M255 730 V898"/>
+
+  <path class="arrow-soft" d="M560 395 H472"/>
+  <path class="arrow-soft" d="M430 675 H508"/>
+  <path class="arrow-soft" d="M740 620 V462"/>
+</svg>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>野々村 俊輔 | Public Site</title>
+    <style>
+      :root {
+        --bg: #f3f6fa;
+        --ink: #1d2835;
+        --muted: #586879;
+        --accent: #0d5ea6;
+        --line: rgba(52, 83, 112, 0.14);
+        --surface: rgba(255, 255, 255, 0.9);
+        --shadow: 0 24px 80px rgba(34, 60, 88, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at top left, rgba(47, 125, 195, 0.16), transparent 28%),
+          linear-gradient(180deg, #f8fafc 0%, var(--bg) 46%, #edf2f7 100%);
+        font-family: "Avenir Next", "Hiragino Sans", "Yu Gothic", sans-serif;
+      }
+
+      .page {
+        width: min(1040px, calc(100vw - 32px));
+        margin: 20px auto 48px;
+      }
+
+      .hero,
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        background: var(--surface);
+        box-shadow: var(--shadow);
+      }
+
+      .hero {
+        padding: 42px;
+      }
+
+      .eyebrow {
+        margin: 0 0 12px;
+        color: var(--accent);
+        font-size: 0.82rem;
+        font-weight: 800;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      .identity {
+        margin: 0 0 10px;
+        font-size: 1rem;
+        font-weight: 700;
+      }
+
+      h1,
+      h2 {
+        margin: 0;
+        font-family: "Iowan Old Style", "Palatino Linotype", "Yu Mincho", serif;
+        line-height: 1.08;
+      }
+
+      h1 {
+        font-size: clamp(2.8rem, 7vw, 5rem);
+        letter-spacing: -0.04em;
+      }
+
+      h2 {
+        font-size: clamp(1.8rem, 4vw, 2.2rem);
+        letter-spacing: -0.03em;
+      }
+
+      p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      .hero p + p {
+        margin-top: 16px;
+      }
+
+      .disclosure {
+        margin-top: 18px;
+        padding: 15px 18px;
+        border: 1px solid rgba(13, 94, 166, 0.14);
+        border-radius: 18px;
+        background: rgba(13, 94, 166, 0.05);
+        font-size: 0.92rem;
+      }
+
+      .page-meta {
+        margin-top: 18px;
+        padding: 14px 16px;
+        border: 1px solid rgba(13, 94, 166, 0.12);
+        border-radius: 18px;
+        background: rgba(13, 94, 166, 0.05);
+        color: var(--muted);
+        font-size: 0.92rem;
+        line-height: 1.7;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 22px;
+        margin-top: 22px;
+      }
+
+      .panel {
+        padding: 26px;
+      }
+
+      .meta {
+        margin-top: 20px;
+        padding-top: 16px;
+        border-top: 1px solid var(--line);
+        font-size: 0.92rem;
+        color: var(--muted);
+      }
+
+      .links {
+        display: grid;
+        gap: 12px;
+        margin-top: 18px;
+      }
+
+      .link-card {
+        display: block;
+        padding: 18px 20px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.9);
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .link-card strong {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--accent);
+      }
+
+      ul {
+        margin: 18px 0 0;
+        padding-left: 18px;
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      @media (max-width: 860px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero {
+          padding: 30px 22px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <section class="hero">
+        <p class="eyebrow">Public Site</p>
+        <p class="identity">野々村 俊輔 / Shunsuke Nonomura</p>
+        <h1>公開用の自己紹介ページ</h1>
+        <p>
+          ここは private リポジトリから export した公開ページ群です。ポートフォリオだけを中心にした構造ではなく、
+          それぞれのページを `Top` 直下の公開ページとして並べて調整していきます。
+        </p>
+        <p>
+          source of truth は private な `agent-skill-hub` 側にあり、必要な内容だけを選別して公開用 mirror へ同期します。
+        </p>
+        <p class="page-meta">作成日: 2026-04-05 / 更新日: 2026-04-05</p>
+        <p class="disclosure">
+          このページ群は private 側で調整した内容をもとに公開しています。事実関係や掲載意図は本人の判断に基づいています。
+        </p>
+        <p class="meta">Status: public-v20260406-04</p>
+      </section>
+
+      <div class="grid">
+        <section class="panel">
+          <p class="eyebrow">Contents</p>
+          <h2>公開ページ群</h2>
+          <div class="links">
+            <a class="link-card" href="./portfolio/">
+              <strong>Portfolio</strong>
+              これまでの取り組み、強み、個人プロジェクトをまとめたポートフォリオ
+            </a>
+            <a class="link-card" href="./agent-skill-hub/">
+              <strong>agent-skill-hub</strong>
+              個人で育てている agent skill / memory / workflow 設計プロジェクトの詳細
+            </a>
+            <a class="link-card" href="./timeline/">
+              <strong>Timeline</strong>
+              公私を並べた自分年表の草案
+            </a>
+            <a class="link-card" href="./games/">
+              <strong>Games</strong>
+              触ってきたゲーム全体を一覧するページ
+            </a>
+            <a class="link-card" href="./rhythm-games/">
+              <strong>Rhythm Games</strong>
+              長く続けている音ゲー趣味と、その続け方の紹介
+            </a>
+            <a class="link-card" href="./student-game-projects/">
+              <strong>Student Game Projects</strong>
+              学生時代のゲーム制作経験と、今につながる創作の源泉
+            </a>
+            <a class="link-card" href="./notes/">
+              <strong>Public Notes</strong>
+              living-notes 由来の snapshot を置く公開ノート棚
+            </a>
+          </div>
+        </section>
+
+        <section class="panel">
+          <p class="eyebrow">Notes</p>
+          <h2>運用方針</h2>
+          <ul>
+            <li>各ページは `Top` 直下の sibling page として扱う</li>
+            <li>ポートフォリオは1ページであり、他ページの親階層ではない</li>
+            <li>公開ノートは `living-notes` の mirror ではなく、必要時に切り出した snapshot とする</li>
+            <li>`workspace` では `workspace` 内の導線、`public-site` では `public-site` 内の導線を持たせる</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>

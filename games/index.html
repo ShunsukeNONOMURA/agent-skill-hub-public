@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Games | Shunsuke Nonomura</title>
+    <style>
+      :root {
+        --bg: #f5f3ef;
+        --surface: rgba(255, 252, 248, 0.94);
+        --surface-strong: #fffdfa;
+        --ink: #221d18;
+        --muted: #645b52;
+        --line: rgba(98, 76, 51, 0.14);
+        --accent: #86531b;
+        --accent-2: #c5842a;
+        --accent-soft: rgba(134, 83, 27, 0.1);
+        --shadow: 0 24px 72px rgba(70, 49, 26, 0.12);
+        --radius-xl: 30px;
+        --radius-lg: 22px;
+        --radius-md: 18px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at top left, rgba(197, 132, 42, 0.16), transparent 24%),
+          radial-gradient(circle at 90% 0%, rgba(134, 83, 27, 0.1), transparent 26%),
+          linear-gradient(180deg, #fcfbf8 0%, var(--bg) 44%, #efe9df 100%);
+        font-family: "Avenir Next", "Hiragino Sans", "Yu Gothic", sans-serif;
+      }
+
+      .page {
+        width: min(980px, calc(100vw - 32px));
+        margin: 20px auto 48px;
+      }
+
+      .hero,
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: var(--radius-xl);
+        background: var(--surface);
+        box-shadow: var(--shadow);
+      }
+
+      .hero {
+        padding: 42px;
+      }
+
+      .eyebrow {
+        margin: 0 0 12px;
+        color: var(--accent);
+        font-size: 0.82rem;
+        font-weight: 800;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+        font-family: "Iowan Old Style", "Palatino Linotype", "Yu Mincho", serif;
+        line-height: 1.08;
+      }
+
+      h1 {
+        font-size: clamp(2.8rem, 7vw, 5rem);
+        letter-spacing: -0.04em;
+      }
+
+      h2 {
+        font-size: clamp(1.75rem, 4vw, 2.2rem);
+        letter-spacing: -0.03em;
+      }
+
+      h3 {
+        font-size: 1.12rem;
+      }
+
+      p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.82;
+      }
+
+      .hero p + p {
+        margin-top: 14px;
+      }
+
+      .chips,
+      .links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      .chip,
+      .link {
+        padding: 10px 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(134, 83, 27, 0.12);
+        background: var(--accent-soft);
+        color: var(--accent);
+        text-decoration: none;
+        font-size: 0.84rem;
+        font-weight: 700;
+      }
+
+      .breadcrumb {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+        margin-top: 14px;
+        padding: 12px 16px;
+        border: 1px solid rgba(134, 83, 27, 0.12);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.72);
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .breadcrumb a {
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 700;
+      }
+
+      .crumb-sep {
+        color: rgba(100, 91, 82, 0.7);
+      }
+
+      .standout-pill,
+      .favorite-pill {
+        display: inline-flex;
+        margin-left: 8px;
+        padding: 4px 8px;
+        border-radius: 999px;
+        font-size: 0.7rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        vertical-align: middle;
+        white-space: nowrap;
+      }
+
+      .standout-pill {
+        background: rgba(197, 132, 42, 0.18);
+        color: #7a4310;
+      }
+
+      .favorite-pill {
+        background: rgba(134, 83, 27, 0.1);
+        color: var(--accent);
+      }
+
+      .page-meta {
+        margin-top: 18px;
+        padding: 14px 16px;
+        border: 1px solid rgba(134, 83, 27, 0.12);
+        border-radius: 18px;
+        background: rgba(134, 83, 27, 0.05);
+        color: var(--muted);
+        font-size: 0.92rem;
+        line-height: 1.7;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 22px;
+        margin-top: 22px;
+      }
+
+      .stack {
+        display: grid;
+        gap: 22px;
+      }
+
+      .panel {
+        padding: 28px;
+      }
+
+      .table-wrap {
+        margin-top: 18px;
+        overflow-x: auto;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-md);
+        background: var(--surface-strong);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 720px;
+      }
+
+      th,
+      td {
+        padding: 14px 16px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+        vertical-align: top;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      th {
+        color: var(--accent);
+        font-size: 0.8rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        background: rgba(134, 83, 27, 0.06);
+        white-space: nowrap;
+      }
+
+      td strong {
+        color: var(--ink);
+      }
+
+      tr:last-child td {
+        border-bottom: 0;
+      }
+
+      .bullets {
+        display: grid;
+        gap: 12px;
+        margin: 18px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .bullets li {
+        position: relative;
+        padding-left: 18px;
+        color: var(--muted);
+        line-height: 1.72;
+      }
+
+      .bullets li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.72em;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      }
+
+      @media (max-width: 900px) {
+        .hero,
+        .panel {
+          padding: 26px 22px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <nav class="breadcrumb" aria-label="breadcrumb">
+        <a href="../">Top</a>
+        <span class="crumb-sep">/</span>
+        <span>Games</span>
+      </nav>
+
+      <section class="hero">
+        <p class="eyebrow">Draft Page</p>
+        <h1>触ってきたゲーム一覧</h1>
+        <p>
+          これまで触ってきたゲームを、ジャンルごとにざっと見渡せるようにまとめた草案です。
+          音ゲーのように個別ページで厚く語る題材もありますが、このページでは全体像が分かることを優先しています。
+        </p>
+        <p>
+          単なるプレイ履歴というより、反復して遊んだもの、作り込みや譜面作成まで触れたもの、
+          改造や導入作業までやっていたものを含めて、「どう関わってきたか」が見える形を目指しています。
+        </p>
+        <div class="chips">
+          <span class="chip">Rhythm Games</span>
+          <span class="chip">Arcade</span>
+          <span class="chip">Online</span>
+          <span class="chip">Consumer</span>
+          <span class="chip">Cards</span>
+          <span class="chip">Shooting</span>
+          <span class="chip">Modding</span>
+        </div>
+        <p class="page-meta">作成日: 2026-04-05 / 更新日: 2026-04-05</p>
+      </section>
+
+      <div class="layout">
+        <div class="stack">
+          <section class="panel">
+            <p class="eyebrow">Rhythm Games</p>
+            <h2>音ゲー</h2>
+            <p>
+              一番長く触ってきたジャンルです。コンシューマ版 `太鼓の達人 あっぱれ三代目` から入り、
+              `Dancing☆Onigiri`、`IIDX`、`BMS` へ流れながら、他機種もゆるく継続してきました。
+            </p>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>タイトル</th>
+                    <th>プラットフォーム</th>
+                    <th>プレイ時期</th>
+                    <th>プレイ状況</th>
+                    <th>一言メモ</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>太鼓の達人</strong></td>
+                    <td>consumer / arcade</td>
+                    <td>2004 年ごろから</td>
+                    <td>たまに遊ぶ</td>
+                    <td>入口としてやったのは `太鼓の達人 あっぱれ三代目`。アーケード版もたまに遊ぶ。</td>
+                  </tr>
+                  <tr>
+                    <td><strong>`Dancing☆Onigiri`</strong></td>
+                    <td>browser / Flash</td>
+                    <td>2005 年から 2006 年ごろ</td>
+                    <td>やり込み期あり</td>
+                    <td>かなりやり込んでいた時期がある。</td>
+                  </tr>
+                  <tr>
+                    <td><strong>beatmania IIDX</strong></td>
+                    <td>arcade</td>
+                    <td>2007 年から継続</td>
+                    <td>メイン</td>
+                    <td><span class="standout-pill">長期継続</span> 2025 年時点で SP 皆伝。</td>
+                  </tr>
+                  <tr>
+                    <td><strong>BMS</strong></td>
+                    <td>PC</td>
+                    <td>2007 年から継続</td>
+                    <td>メイン</td>
+                    <td><span class="standout-pill">長期継続</span> 2025 年にキーボードプレイを始め、その年に GENOCIDE 2018 発狂 9 段まで到達。</td>
+                  </tr>
+                  <tr>
+                    <td><strong>pop'n music</strong></td>
+                    <td>arcade</td>
+                    <td>断続的</td>
+                    <td>たまに遊ぶ</td>
+                    <td>他機種の並びの中で触れているタイトル。</td>
+                  </tr>
+                  <tr>
+                    <td><strong>SOUND VOLTEX</strong></td>
+                    <td>arcade</td>
+                    <td>断続的</td>
+                    <td>継続的に触れている</td>
+                    <td>IIDX/BMS 以外の機種として継続的に触れている。</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Dance Dance Revolution</strong></td>
+                    <td>arcade</td>
+                    <td>断続的</td>
+                    <td>気分転換も兼ねて継続</td>
+                    <td>気分転換も兼ねて遊ぶことがある。</td>
+                  </tr>
+                  <tr>
+                    <td><strong>GITADORA DrumMania</strong></td>
+                    <td>arcade</td>
+                    <td>断続的</td>
+                    <td>気分転換も兼ねて継続</td>
+                    <td>気分転換も兼ねて遊ぶことがある。</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Beat Saber</strong></td>
+                    <td>VR</td>
+                    <td>断続的</td>
+                    <td>気分転換も兼ねて継続</td>
+                    <td>mod 導入のうえでカスタム曲も遊んでいた。最近はあまりやれていない。</td>
+                  </tr>
+                  <tr>
+                    <td><strong>StepMania</strong></td>
+                    <td>PC</td>
+                    <td>時期未整理</td>
+                    <td>遊んでいた時期あり</td>
+                    <td>譜面作成まで触っていた。</td>
+                  </tr>
+                  <tr>
+                    <td><strong>PSP Revolution</strong></td>
+                    <td>PSP</td>
+                    <td>2009 年から 2011 年ごろ</td>
+                    <td>遊んでいた時期あり</td>
+                    <td><span class="favorite-pill">お気に入り</span> 譜面作成まで触っていた。高専生の友人と遊んでいたのが印象深い。</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="panel">
+            <p class="eyebrow">Arcade</p>
+            <h2>アーケード</h2>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>タイトル</th>
+                    <th>ジャンル</th>
+                    <th>プラットフォーム</th>
+                    <th>プレイ時期</th>
+                    <th>プレイ状況 / 実績</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>艦これアーケード</strong></td>
+                    <td>arcade / card-based action strategy</td>
+                    <td>arcade</td>
+                    <td>2016 年から継続</td>
+                    <td><span class="standout-pill">長期継続</span> 2016 年のサービス開始時から続けている長期継続タイトル。2025 年時点までの甲勲章をすべて取得して合計 16 個。</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="panel">
+            <p class="eyebrow">Online</p>
+            <h2>オンラインゲーム</h2>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>タイトル</th>
+                    <th>ジャンル</th>
+                    <th>プラットフォーム</th>
+                    <th>プレイ時期</th>
+                    <th>プレイ状況 / メモ</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>RED STONE</strong></td>
+                    <td>MMO RPG</td>
+                    <td>PC online</td>
+                    <td>2005 年ごろ</td>
+                    <td>ウルフマンをレベル 100 まで育成。</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Hearthstone</strong></td>
+                    <td>online card game</td>
+                    <td>PC online</td>
+                    <td>主に 2015 年から 2016 年</td>
+                    <td><span class="favorite-pill">お気に入り</span> ズーウォーロック、呼び声ハンター、秘策メイジを使用。初めて明示的にランカー到達したタイトルになった。</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="panel">
+            <p class="eyebrow">Consumer</p>
+            <h2>コンシューマゲーム</h2>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>タイトル</th>
+                    <th>プラットフォーム</th>
+                    <th>プレイ時期</th>
+                    <th>プレイ状況</th>
+                    <th>一言メモ</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>マリオカート Wii</strong></td>
+                    <td>Wii</td>
+                    <td>時期未整理</td>
+                    <td>プレイ</td>
+                    <td>VR 8000 程度。</td>
+                  </tr>
+                  <tr>
+                    <td><strong>大乱闘スマッシュブラザーズ DX</strong></td>
+                    <td>GameCube</td>
+                    <td>中学時代</td>
+                    <td>かなり遊んだ</td>
+                    <td><span class="favorite-pill">お気に入り</span> 中学時代によく遊び、2000 時間ぐらい触った。ファルコでクイブラ、リフコンをして遊んでいた。</td>
+                  </tr>
+                  <tr>
+                    <td><strong>大乱闘スマッシュブラザーズ X</strong></td>
+                    <td>Wii</td>
+                    <td>高専 5 年時</td>
+                    <td>やり込んだ時期あり</td>
+                    <td><span class="favorite-pill">お気に入り</span> メタナイト使用。高専祭学内大会で優勝。</td>
+                  </tr>
+                  <tr>
+                    <td><strong>大乱闘スマッシュブラザーズ SPECIAL</strong></td>
+                    <td>Switch</td>
+                    <td>時期未整理</td>
+                    <td>プレイ</td>
+                    <td>VIP 到達 1 キャラ。</td>
+                  </tr>
+                  <tr>
+                    <td><strong>カービィのエアライド</strong></td>
+                    <td>GameCube</td>
+                    <td>中学時代</td>
+                    <td>プレイ</td>
+                    <td>GameCube の作品として面白く、中学時代にシティトライアルでよく遊んでいた。</td>
+                  </tr>
+                  <tr>
+                    <td><strong>カービィのエアライダー</strong></td>
+                    <td>Switch 2</td>
+                    <td>2025 年から</td>
+                    <td>プレイ</td>
+                    <td>2025 年発売タイトル。シティトライアルでインディゴ到達。</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="panel">
+            <p class="eyebrow">Cards & Shooting</p>
+            <h2>カードゲーム / STG</h2>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>タイトル</th>
+                    <th>ジャンル</th>
+                    <th>プラットフォーム</th>
+                    <th>プレイ時期</th>
+                    <th>一言メモ</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>デュエル・マスターズ</strong></td>
+                    <td>trading card game</td>
+                    <td>physical card game</td>
+                    <td>2009 年から 2011 年ごろ</td>
+                    <td><span class="favorite-pill">お気に入り</span> 青単サイバー速攻、デスマーチ軸黒緑速攻、ドロマーハイドロ、超次元 GENJI ビートを使用。</td>
+                  </tr>
+                  <tr>
+                    <td><strong>東方系作品</strong></td>
+                    <td>shooting game</td>
+                    <td>PC</td>
+                    <td>2005 年から 2013 年ぐらい</td>
+                    <td>Hard クリアできる場合があるぐらい。東方花映塚は Lunatic クリア済み、東方文花帖の金閣寺はクリア済み。</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+
+        <div class="stack">
+          <section class="panel">
+            <p class="eyebrow">Modding</p>
+            <h2>改造や導入まで触ったもの</h2>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>対象</th>
+                    <th>プラットフォーム</th>
+                    <th>関わり方</th>
+                    <th>メモ</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>PSP Revolution</strong></td>
+                    <td>PSP</td>
+                    <td>遊んでいた</td>
+                    <td>譜面作成まで触っていた。公開ページでは導入手順や改造まわりの詳細は扱わない。</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Wii Homebrew Channel</strong></td>
+                    <td>Wii</td>
+                    <td>導入して改造</td>
+                    <td>ハードウェアや実行環境の調整自体を試すこともあった。</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="panel">
+            <p class="eyebrow">Reading</p>
+            <h2>このページの使い方</h2>
+            <ul class="bullets">
+              <li>一覧としてゲーム歴の幅を見せるためのページ</li>
+              <li>詳細に語りたい題材は別ページへ分離する前提</li>
+              <li>今は草案なので、粒度や見せ方は調整していく</li>
+            </ul>
+          </section>
+
+          <section class="panel">
+            <p class="eyebrow">Related</p>
+            <h2>関連ページ</h2>
+            <div class="links">
+              <a class="link" href="../portfolio/">Portfolio</a>
+              <a class="link" href="../rhythm-games/">Rhythm Games</a>
+              <a class="link" href="../student-game-projects/">Student Game Projects</a>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Timeline | Shunsuke</title>
+    <style>
+      :root {
+        --bg: #f4f1eb;
+        --surface: rgba(255, 252, 247, 0.94);
+        --surface-strong: #fffdfa;
+        --ink: #231c17;
+        --muted: #64584f;
+        --line: rgba(102, 77, 49, 0.14);
+        --accent: #9a5a1a;
+        --accent-2: #d19746;
+        --accent-soft: rgba(154, 90, 26, 0.1);
+        --public: #9a5a1a;
+        --private: #2a6b66;
+        --shadow: 0 24px 72px rgba(74, 53, 31, 0.12);
+        --radius-xl: 30px;
+        --radius-lg: 22px;
+        --radius-md: 18px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at top left, rgba(209, 151, 70, 0.16), transparent 24%),
+          radial-gradient(circle at 88% 0%, rgba(42, 107, 102, 0.12), transparent 24%),
+          linear-gradient(180deg, #fcfaf7 0%, var(--bg) 44%, #efe7dc 100%);
+        font-family: "Avenir Next", "Hiragino Sans", "Yu Gothic", sans-serif;
+      }
+
+      .page {
+        width: min(980px, calc(100vw - 32px));
+        margin: 20px auto 48px;
+      }
+
+      .hero,
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: var(--radius-xl);
+        background: var(--surface);
+        box-shadow: var(--shadow);
+      }
+
+      .hero {
+        padding: 42px;
+      }
+
+      .panel {
+        padding: 28px;
+      }
+
+      .eyebrow {
+        margin: 0 0 12px;
+        color: var(--accent);
+        font-size: 0.82rem;
+        font-weight: 800;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+        font-family: "Iowan Old Style", "Palatino Linotype", "Yu Mincho", serif;
+        line-height: 1.08;
+      }
+
+      h1 {
+        font-size: clamp(2.8rem, 7vw, 5rem);
+        letter-spacing: -0.04em;
+      }
+
+      h2 {
+        font-size: clamp(1.8rem, 4vw, 2.2rem);
+        letter-spacing: -0.03em;
+      }
+
+      h3 {
+        font-size: 1.12rem;
+      }
+
+      p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.82;
+      }
+
+      .hero p + p,
+      .panel > p + p {
+        margin-top: 14px;
+      }
+
+      .chips,
+      .links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      .chip,
+      .link {
+        padding: 10px 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(154, 90, 26, 0.12);
+        background: var(--accent-soft);
+        color: var(--accent);
+        text-decoration: none;
+        font-size: 0.84rem;
+        font-weight: 700;
+      }
+
+      .breadcrumb {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+        margin-top: 14px;
+        padding: 12px 16px;
+        border: 1px solid rgba(154, 90, 26, 0.12);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.72);
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .breadcrumb a {
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 700;
+      }
+
+      .crumb-sep {
+        color: rgba(100, 88, 79, 0.7);
+      }
+
+      .page-meta {
+        margin-top: 18px;
+        padding: 14px 16px;
+        border: 1px solid rgba(154, 90, 26, 0.12);
+        border-radius: 18px;
+        background: rgba(154, 90, 26, 0.05);
+        color: var(--muted);
+        font-size: 0.92rem;
+        line-height: 1.7;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 22px;
+        margin-top: 22px;
+      }
+
+      .stack {
+        display: grid;
+        gap: 22px;
+      }
+
+      .legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      .legend-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: var(--surface-strong);
+        color: var(--muted);
+        font-size: 0.84rem;
+        font-weight: 700;
+      }
+
+      .legend-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+      }
+
+      .timeline {
+        display: grid;
+        gap: 18px;
+        margin-top: 18px;
+      }
+
+      .era {
+        border: 1px solid var(--line);
+        border-radius: var(--radius-lg);
+        background: var(--surface-strong);
+        overflow: hidden;
+      }
+
+      .era-head {
+        display: grid;
+        grid-template-columns: 180px 1fr;
+        gap: 18px;
+        padding: 20px 22px;
+        border-bottom: 1px solid var(--line);
+        background: linear-gradient(135deg, rgba(154, 90, 26, 0.05), rgba(209, 151, 70, 0.04));
+      }
+
+      .era-period {
+        color: var(--accent);
+        font-size: 0.86rem;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .era-copy p {
+        margin-top: 8px;
+      }
+
+      .era-body {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .lane {
+        padding: 20px 22px 22px;
+      }
+
+      .lane + .lane {
+        border-top: 1px solid var(--line);
+      }
+
+      .lane-title {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 12px;
+        font-size: 0.84rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .lane-title.public {
+        color: var(--public);
+      }
+
+      .lane-title.private {
+        color: var(--private);
+      }
+
+      .bullets {
+        display: grid;
+        gap: 10px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .bullets li {
+        position: relative;
+        padding-left: 18px;
+        color: var(--muted);
+        line-height: 1.72;
+      }
+
+      .bullets li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.72em;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      }
+
+      .cards {
+        display: grid;
+        gap: 14px;
+        margin-top: 18px;
+      }
+
+      .card {
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-md);
+        background: var(--surface-strong);
+      }
+
+      .card p + p {
+        margin-top: 10px;
+      }
+
+      code {
+        padding: 0.15em 0.4em;
+        border-radius: 8px;
+        background: rgba(154, 90, 26, 0.08);
+        color: #8a4f17;
+        font-family: "SFMono-Regular", "Consolas", "Menlo", monospace;
+        font-size: 0.92em;
+      }
+
+      @media (max-width: 960px) {
+        .era-head,
+        .era-body {
+          grid-template-columns: 1fr;
+        }
+
+        .hero,
+        .panel {
+          padding: 26px 22px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <nav class="breadcrumb" aria-label="breadcrumb">
+        <a href="../">Top</a>
+        <span class="crumb-sep">/</span>
+        <span>Timeline</span>
+      </nav>
+
+      <section class="hero">
+        <p class="eyebrow">Draft Page</p>
+        <h1>自分年表</h1>
+        <p>
+          学業や仕事の流れだけでなく、その時期に何へ熱中していたかも合わせて見えるようにした草案です。
+          公的な変化と私的な継続を同じ年軸に置くことで、今のスタンスがどこから来ているかを読みやすくすることを狙っています。
+        </p>
+        <div class="chips">
+          <span class="chip">Education</span>
+          <span class="chip">Research</span>
+          <span class="chip">Work</span>
+          <span class="chip">Games</span>
+          <span class="chip">Creation</span>
+          <span class="chip">Long-Term Direction</span>
+        </div>
+        <div class="legend">
+          <span class="legend-item"><span class="legend-dot" style="background: var(--public);"></span>公的な話</span>
+          <span class="legend-item"><span class="legend-dot" style="background: var(--private);"></span>私的な話</span>
+        </div>
+        <p class="page-meta">作成日: 2026-04-05 / 更新日: 2026-04-05</p>
+      </section>
+
+      <div class="layout">
+        <div class="stack">
+          <section class="panel">
+            <p class="eyebrow">Timeline</p>
+            <h2>公私を並べた時系列</h2>
+            <div class="timeline">
+              <article class="era">
+                <div class="era-head">
+                  <div class="era-period">2005-2007</div>
+                  <div class="era-copy">
+                    <h3>中学時代</h3>
+                    <p>基礎学力の強さ、評価条件の見極め、対人距離感の原型ができた時期です。</p>
+                  </div>
+                </div>
+                <div class="era-body">
+                  <div class="lane">
+                    <div class="lane-title public">公的な話</div>
+                    <ul class="bullets">
+                      <li>この時期に、評価条件がはっきりした場で強みを出しやすい感覚が固まった。</li>
+                      <li>勉強、部活、創作のどれでも、改善の手応えがあるものを積み上げる傾向が強かった。</li>
+                    </ul>
+                  </div>
+                  <div class="lane">
+                    <div class="lane-title private">私的な話</div>
+                    <ul class="bullets">
+                      <li>2004 年ごろから音ゲーや対戦ゲームを通じて、反復して上達する面白さに強く惹かれた。</li>
+                      <li>遊ぶだけでなく、ゲーム体験そのものの仕組みに関心を持ち始めた。</li>
+                    </ul>
+                  </div>
+                </div>
+              </article>
+
+              <article class="era">
+                <div class="era-head">
+                  <div class="era-period">2008-2012</div>
+                  <div class="era-copy">
+                    <h3>学生後半</h3>
+                    <p>情報系の専門性と、作る側への関心が一気に強くなった時期です。</p>
+                  </div>
+                </div>
+                <div class="era-body">
+                  <div class="lane">
+                    <div class="lane-title public">公的な話</div>
+                    <ul class="bullets">
+                      <li>2008 年から 2012 年にかけて、情報系の学びを通じてプログラムを書くこと自体への手応えが強くなった。</li>
+                      <li>ゲーム制作や UI 実装を通じて、作る側の面白さがはっきりした。</li>
+                      <li>複数の技術やライブラリに触れながら、試作を完成まで持っていく経験を重ねた。</li>
+                    </ul>
+                  </div>
+                  <div class="lane">
+                    <div class="lane-title private">私的な話</div>
+                    <ul class="bullets">
+                      <li>2007 年ごろから続く音ゲーを中心に、長く続ける趣味の土台がこの時期に固まった。</li>
+                      <li>遊ぶだけでなく、譜面やルールを作る側にも興味が広がった。</li>
+                      <li>友人と遊ぶ時間も含めて、ゲームが創作や技術関心の源になっていった。</li>
+                    </ul>
+                  </div>
+                </div>
+              </article>
+
+              <article class="era">
+                <div class="era-head">
+                  <div class="era-period">2013-2016</div>
+                  <div class="era-copy">
+                    <h3>大学・大学院時代</h3>
+                    <p>研究へ進みつつ、得意不得意の輪郭がかなりはっきりした時期です。</p>
+                  </div>
+                </div>
+                <div class="era-body">
+                  <div class="lane">
+                    <div class="lane-title public">公的な話</div>
+                    <ul class="bullets">
+                      <li>2013 年から 2016 年にかけて、画像やモデリングのようなテーマに腰を据えて向き合った。</li>
+                      <li>得意不得意の輪郭がかなり明確になり、専門性で勝負する感覚が固まった。</li>
+                      <li>就職も、興味と適性の接点を探しながら進めた。</li>
+                    </ul>
+                  </div>
+                  <div class="lane">
+                    <div class="lane-title private">私的な話</div>
+                    <ul class="bullets">
+                      <li>2015 年から 2016 年ごろは、戦略性の高いゲームや収集要素のあるゲームにも継続的に触れていた。</li>
+                      <li>趣味の幅は広がったが、反復と改善を楽しめる題材が中心に残った。</li>
+                    </ul>
+                  </div>
+                </div>
+              </article>
+
+              <article class="era">
+                <div class="era-head">
+                  <div class="era-period">2017-2024</div>
+                  <div class="era-copy">
+                    <h3>社会人前半</h3>
+                    <p>画像理解から設計寄りの役割へと軸足が移り、働き方や将来設計を考え直す土台ができた時期です。</p>
+                  </div>
+                </div>
+                <div class="era-body">
+                  <div class="lane">
+                    <div class="lane-title public">公的な話</div>
+                    <ul class="bullets">
+                      <li>2017 年ごろは画像理解寄りの業務から始まり、徐々に設計や開発リード寄りへ軸足が移った。</li>
+                      <li>2020 年から 2024 年にかけて、API 設計、RDB 設計、責務分離など、構造を整える仕事の比重が大きくなった。</li>
+                      <li>2018 年以降、働き方や将来像を見直すきっかけも積み重なった。</li>
+                    </ul>
+                  </div>
+                  <div class="lane">
+                    <div class="lane-title private">私的な話</div>
+                    <ul class="bullets">
+                      <li>音ゲーは継続して主軸にあり、長期的な趣味として定着した。</li>
+                      <li>学生時代から続いている遊び方や興味が、そのまま今の感覚につながっている。</li>
+                    </ul>
+                  </div>
+                </div>
+              </article>
+
+              <article class="era">
+                <div class="era-head">
+                  <div class="era-period">2025-</div>
+                  <div class="era-copy">
+                    <h3>現在と今後</h3>
+                    <p>10 年後にどうしたいかを考え直し、個人プロジェクトと将来像がつながってきた時期です。</p>
+                  </div>
+                </div>
+                <div class="era-body">
+                  <div class="lane">
+                    <div class="lane-title public">公的な話</div>
+                    <ul class="bullets">
+                      <li>2025 年以降は、AI 活用を含む開発テーマに関わりながら、技術判断を仕組みに落とす役割が強まっている。</li>
+                      <li>2025 年以降、将来的な独立や、自分が納得できる制作へ向かう方向を具体的に考えるようになった。</li>
+                    </ul>
+                  </div>
+                  <div class="lane">
+                    <div class="lane-title private">私的な話</div>
+                    <ul class="bullets">
+                      <li>2025 年以降も、趣味では引き続きゲームを楽しみつつ、作る側へ戻りたい気持ちも強く残っている。</li>
+                      <li>今後は、子どものころや学生時代の延長として、自分が納得できるゲームやコンテンツを作りたい。</li>
+                    </ul>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </section>
+        </div>
+
+        <div class="stack">
+          <section class="panel">
+            <p class="eyebrow">Reading Key</p>
+            <h2>この年表で見せたいこと</h2>
+            <div class="cards">
+              <article class="card">
+                <h3>評価条件が見える場で強い</h3>
+                <p>
+                  ルールや改善条件が構造化されている場で、
+                  粘り強く試行錯誤を積み上げられる傾向があります。
+                </p>
+              </article>
+              <article class="card">
+                <h3>公と私が分断していない</h3>
+                <p>
+                  ゲーム、創作、仕事の進め方は別々ではなく、
+                  試行錯誤を重ねて強くなる感覚や、面白いものに本気で向き合う感覚でつながっています。
+                </p>
+              </article>
+              <article class="card">
+                <h3>独立準備としての資産形成</h3>
+                <p>
+                  仕事のしんどさから自分を守る意味はありますが、
+                  その先で自分が納得できる制作へ時間を使うための準備でもあります。
+                </p>
+              </article>
+            </div>
+          </section>
+
+          <section class="panel">
+            <p class="eyebrow">Links</p>
+            <h2>関連ページ</h2>
+            <div class="links">
+              <a class="link" href="../portfolio/">Portfolio</a>
+              <a class="link" href="../games/">Games Overview Draft</a>
+              <a class="link" href="../rhythm-games/">Rhythm Games</a>
+              <a class="link" href="../student-game-projects/">Student Game Projects</a>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
